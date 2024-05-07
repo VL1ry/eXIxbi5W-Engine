@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eXIxbi5W Engine</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .search-container {
+            text-align: center;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4285F4; 
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px; 
+            font-family: 'Roboto', sans-serif; 
+        }
+
+        button:hover {
+            background-color: #1A73E8; 
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: white;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <h1></h1>
+        <input type="text" id="searchInput" placeholder="create by eXIxbi5W">
+        <button onclick="searchGoogle()">Search</button>
+    </div>
+
+    <script>
+        function searchGoogle() {
+            var query = document.getElementById('searchInput').value;
+            if (query.trim() !== '') {
+                if (query.trim().toLowerCase() === 'eXIxbi5W') {
+                    query = 'L1ry';
+                }
+                var searchUrl = 'https://yandex.com/search/?text=' + encodeURIComponent(query);
+                window.open(searchUrl, '_blank');
+            } else {
+                alert('Please enter a search term.');
+            }
+        }
+
+        function animateText(text, element) {
+            var index = 0;
+            var interval = setInterval(function() {
+                if (index < text.length) {
+                    element.textContent += text[index];
+                    index++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var titleElement = document.querySelector('h1');
+            animateText("eXIxbi5W Engine", titleElement);
+
+            // Generate stars with animation
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement("div");
+                star.classList.add("star");
+                star.style.left = Math.random() * 100 + "%";
+                star.style.top = Math.random() * 100 + "%";
+                document.body.appendChild(star);
+
+                animateStar(star);
+            }
+
+            // Function to animate stars
+            function animateStar(star) {
+                const distance = Math.random() * 20 + 5; // Distance to move
+                const duration = Math.random() * 5000 + 3000; // Duration of animation
+                const startX = parseFloat(star.style.left);
+                const startY = parseFloat(star.style.top);
+
+                const startTime = performance.now();
+
+                function moveStar(currentTime) {
+                    const elapsedTime = currentTime - startTime;
+                    const progress = elapsedTime / duration;
+
+                    const newX = startX + distance * Math.sin(progress * 2 * Math.PI);
+                    star.style.left = newX + "%";
+
+                    if (progress < 1) {
+                        requestAnimationFrame(moveStar);
+                    } else {
+                        animateStar(star); // Restart animation
+                    }
+                }
+
+                requestAnimationFrame(moveStar);
+            }
+        });
+    </script>
+</body>
+</html>
